@@ -1,0 +1,177 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>树莓派使用xrdp连接远程桌面 - 盾迷博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="mthdm,"> 
+    <meta name="description" content="　　最近我好像一直没更新吧……..(光速逃…)　　xrdp连接（windows自带的远程桌面）在网上看到很多关于windows远程桌面连接树莓派的教程。我也按照教程试过了，遇到了几个坑。特意记录在这,"> 
+    <meta name="author" content="灭天会盾迷"> 
+    <link rel="alternative" href="atom.xml" title="盾迷博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">盾迷博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" target="_blank" rel="noopener" data-url="https://mthdm.cc"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">树莓派使用xrdp连接远程桌面</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" target="_blank" rel="noopener" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;" target="_blank" rel="noopener"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">树莓派使用xrdp连接远程桌面</h1>
+        <div class="stuff">
+            <span>八月 15, 2018</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" rel="tag">技术文档</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E9%A6%99%E6%A9%99%E6%B4%BE/" rel="tag">树莓派&香橙派</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>　　最近我好像一直没更新吧……..(光速逃…)<br>　　xrdp连接（windows自带的远程桌面）在网上看到很多关于windows远程桌面连接树莓派的教程。我也按照教程试过了，遇到了几个坑。特意记录在这。（这句是原作者的话……我比他遇到的坑还多…..QAQ<br>　　先说正确的步骤。<br>　　首先打开终端（或SSH）<br>　　1. 必须先安装tightvncserver！！！（这点非常非常重要）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tightvncserver</span><br></pre></td></tr></table></figure>
+<p>　　2. 再安装xrdp服务。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install xrdp</span><br></pre></td></tr></table></figure>
+<p>　　3. 如果开着防火墙ufw ， 那么打开服务器上的远程桌面访问端口（如果是树莓派官网的新系统debian可以直接忽略此项）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ufw allow 3389</span><br></pre></td></tr></table></figure>
+<p>　　4. 重启两个服务</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo service ufw restart</span><br><span class="line">sudo service xrdp restart</span><br></pre></td></tr></table></figure>
+
+<p>　　再看看我遇到的问题：（这句话也是原作者的原话，反正我是没有遇到这个问题）<br>　　1.半天连不上树莓派。（有一个弹窗上面带一个红色叉叉的）<br><img src="/2018/08/15/6/0012.png" alt="错误图片"><br>　　原因：可能是树莓派上的3389端口没打开。参考上面第三条！<br>　　2. 输入正确的用户名和密码 ，由于题主已经处理了此问题，没有截图。但显示错误关键字：xrdp problem connecting。<br>　　google了半天，发现是tightvncserver没有安装。有好些朋友虽然安装了tightvncserver，但安装顺序不对。切记先安装tightvncserver，再安装xrdp。该问题参考<a href="https://ubuntuforums.org/showthread.php?t=1314336" target="_blank" rel="noopener">https://ubuntuforums.org/showthread.php?t=1314336</a></p>
+<p>　　整理自博客园，原链接<a href="https://www.cnblogs.com/edgexie/p/6527992.html" target="_blank" rel="noopener">https://www.cnblogs.com/edgexie/p/6527992.html</a></p>
+<hr>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='580ea16e8e22f94249b1'
+        data-cs='b00c9d8ee15d4d6b0074bf771374f196ec08db26'
+        data-r='mthdm.github.io'
+        data-o='mthdm'
+        data-a='mthdm'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

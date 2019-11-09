@@ -1,0 +1,170 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>hexo-NEXT主题添加来必立评论 - 盾迷博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="mthdm,"> 
+    <meta name="description" content="　　最近我由于抛弃了wordpress的博客改用了hexo，虽然也是加了不少插件，但还是感觉少点什么，就在今天上午我突然想了起来—评论区！！　　我也在百毒上找了一些添加评论的教程，例如友言，网易云跟,"> 
+    <meta name="author" content="灭天会盾迷"> 
+    <link rel="alternative" href="atom.xml" title="盾迷博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">盾迷博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" target="_blank" rel="noopener" data-url="https://mthdm.cc"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">hexo-NEXT主题添加来必立评论</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" target="_blank" rel="noopener" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;" target="_blank" rel="noopener"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">hexo-NEXT主题添加来必立评论</h1>
+        <div class="stuff">
+            <span>八月 22, 2018</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/HEXO/" rel="tag">HEXO</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" rel="tag">技术文档</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>　　最近我由于抛弃了wordpress的博客改用了hexo，虽然也是加了不少插件，但还是感觉少点什么，就在今天上午我突然想了起来—评论区！！<br>　　我也在百毒上找了一些添加评论的教程，例如友言，网易云跟帖之类的，但大多不是停止服务需要备案就是设置过程太复杂，有的甚至没有QQ登录！！终于我找到了来必立，这个只需要修改一行代码，还可以使用QQ，微信，新浪，百度，人人网等账号登录，而且评论后台也做的非常好（真-站长推荐）。<br>　　首先打开来必立官网<a href="https://livere.com/" target="_blank" rel="noopener">https://livere.com/</a><br>　　点击右上角的小人来注册一个账号（需要使用邮箱验证）<br>　　注册好后点击安装（没错就是安装）<br><img src="/2018/08/22/9/9002.png" alt="安装"><br>复制下图红色括号以内的内容<br><img src="/2018/08/22/9/9003.png" alt="id"><br>将其粘贴到next的配置文件中(_config.yml)如下图所示<br><img src="/2018/08/22/9/9001.png" alt="配置代码"><br>如果看不清就看下面的代码行（第７行）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"># Support for youyan comments system.</span><br><span class="line"># You can get your uid from http://www.uyan.cc</span><br><span class="line">#youyan_uid: your uid</span><br><span class="line"></span><br><span class="line"># Support for LiveRe comments system.</span><br><span class="line"># You can get your uid from https://livere.com/insight/myCode (General web site)</span><br><span class="line">livere_uid: MTAyMC8zOTEyNi8xNTY1Mw</span><br><span class="line"></span><br><span class="line"># Gitment</span><br><span class="line"># Introduction: https://imsun.net/posts/gitment-introduction/</span><br><span class="line"># You can get your Github ID from https://api.github.com/users/&lt;Github username&gt;</span><br></pre></td></tr></table></figure>
+<p>记得要吧livere前面的#去掉，还有就是冒号后面有一个空格（我就忘输了一次）<br>　　然后保存退出，重新部署看看是不是文章下多了评论框（づ￣3￣）づ╭❤～<br><img src="/2018/08/22/9/9004.png" alt="评论框"><br>　　另外一个我非常推荐这玩意的原因就是这个后台非常好用，可以统计评论信息-具体看图<br><img src="/2018/08/22/9/9005.png" alt="后台"><br>　　如果还有什么地方不明白可以Q我哦ヾ(๑╹◡╹)ﾉ”<br>　　不过这次我非常推荐直接在评论区留言，在评论区留言，在评论区留言，重要的事情说三遍！！！</p>
+<p>　　还有最后一件要说的事…..我26号就开学了，以后更新频率肯定会下降ヽ(`Д´)ﾉ<br>　　微笑面对高中.psd</p>
+<hr>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='580ea16e8e22f94249b1'
+        data-cs='b00c9d8ee15d4d6b0074bf771374f196ec08db26'
+        data-r='mthdm.github.io'
+        data-o='mthdm'
+        data-a='mthdm'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>

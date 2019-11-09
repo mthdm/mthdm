@@ -1,0 +1,174 @@
+
+<!DOCTYPE html>
+<html lang="zh-CN" class="loading">
+<head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Pi编译安装PHPNginx并安装完整LEMP环境 - 盾迷博客</title>
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="google" content="notranslate" />
+    <meta name="keywords" content="mthdm,"> 
+    <meta name="description" content="　　1.安装 Nginx+Php+Mysql
+123456789101112131415161718192021#添加Nginx、Php最新源并刷新源sudo add-apt-repository ,"> 
+    <meta name="author" content="灭天会盾迷"> 
+    <link rel="alternative" href="atom.xml" title="盾迷博客" type="application/atom+xml"> 
+    <link rel="icon" href="/img/favicon.png"> 
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.css">
+    <link rel="stylesheet" href="/css/diaspora.css">
+    <script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({
+              google_ad_client: "ca-pub-8691406134231910",
+              enable_page_level_ads: true
+         });
+    </script>
+    <script async custom-element="amp-auto-ads"
+        src="https://cdn.ampproject.org/v0/amp-auto-ads-0.1.js">
+    </script>
+</head>
+
+<body class="loading">
+    <span id="config-title" style="display:none">盾迷博客</span>
+    <div id="loader"></div>
+    <div id="single">
+    <div id="top" style="display: block;">
+    <div class="bar" style="width: 0;"></div>
+    <a class="icon-home image-icon" href="javascript:;" target="_blank" rel="noopener" data-url="https://mthdm.cc"></a>
+    <div title="播放/暂停" class="icon-play"></div>
+    <h3 class="subtitle">Pi编译安装PHPNginx并安装完整LEMP环境</h3>
+    <div class="social">
+        <!--<div class="like-icon">-->
+            <!--<a href="javascript:;" target="_blank" rel="noopener" class="likeThis active"><span class="icon-like"></span><span class="count">76</span></a>-->
+        <!--</div>-->
+        <div>
+            <div class="share">
+                <a title="获取二维码" class="icon-scan" href="javascript:;" target="_blank" rel="noopener"></a>
+            </div>
+            <div id="qr"></div>
+        </div>
+    </div>
+    <div class="scrollbar"></div>
+</div>
+
+    <div class="section">
+        <div class="article">
+    <div class='main'>
+        <h1 class="title">Pi编译安装PHPNginx并安装完整LEMP环境</h1>
+        <div class="stuff">
+            <span>七月 27, 2018</span>
+            
+  <ul class="post-tags-list" itemprop="keywords"><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%8A%80%E6%9C%AF%E6%96%87%E6%A1%A3/" rel="tag">技术文档</a></li><li class="post-tags-list-item"><a class="post-tags-list-link" href="/tags/%E6%A0%91%E8%8E%93%E6%B4%BE-%E9%A6%99%E6%A9%99%E6%B4%BE/" rel="tag">树莓派&香橙派</a></li></ul>
+
+
+        </div>
+        <div class="content markdown">
+            <p>　　1.安装 Nginx+Php+Mysql</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">#添加Nginx、Php最新源并刷新源</span><br><span class="line">sudo add-apt-repository ppa:nginx/stable</span><br><span class="line">sudo add-apt-repository ppa:ondrej/php</span><br><span class="line">sudo apt-get update</span><br><span class="line"></span><br><span class="line">#安装Nginx</span><br><span class="line">sudo apt-get install nginx</span><br><span class="line"></span><br><span class="line">#安装Php7.1 FPM</span><br><span class="line">sudo apt-get install php7.1-fpm</span><br><span class="line">#php7.1 curl扩展</span><br><span class="line">sudo apt-get install php7.1-curl</span><br><span class="line"></span><br><span class="line">#安装Mysql</span><br><span class="line">sudo install mysql-server</span><br><span class="line">#备份Mysql数据库</span><br><span class="line">mysqldump -u root -p 欲备份的数据库名 &gt; 导出的数据库名.sql</span><br><span class="line">#恢复mysql数据库</span><br><span class="line">mysql -u root -p 恢复的数据库名 &lt; 导出过的数据库名.sql</span><br><span class="line">＃如恢复的数据库不存在 需要手动创建</span><br><span class="line">create database 恢复的数据库名;</span><br></pre></td></tr></table></figure>
+<p>2.编译安装Nginx/1.11.4升级HTTP/2.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br></pre></td><td class="code"><pre><span class="line">#下载并解压Nginx源码</span><br><span class="line">wget -c https://nginx.org/download/nginx-1.11.4.tar.gz</span><br><span class="line">tar -zxvf nginx-1.11.4.tar.gz</span><br><span class="line"></span><br><span class="line">#下载并解压OpenSSL源码</span><br><span class="line">wget -c https://www.openssl.org/source/openssl-1.1.0.tar.gz</span><br><span class="line">tar -zxvf openssl-1.1.0.tar.gz</span><br><span class="line"></span><br><span class="line">#下载并解压nginx-ct源码</span><br><span class="line">wget -O nginx-ct.zip -c https://github.com/grahamedgecombe/nginx-ct/archive/v1.3.0.zip</span><br><span class="line">unzip nginx-ct.zip</span><br><span class="line"></span><br><span class="line">#修复Nginx/1.11.3无法编译的问题&lt;font style=&quot;color:red&quot;&gt;此问题在Nginx 1.11.4已经解决,1.11.4请忽略&lt;/font&gt;</span><br><span class="line">#由于OpenSSL 1.1.0 删除了 SSL_R_NO_CIPHERS_PASSED导致Nginx无法编译。这里我们需要修复nginx源码中的[一个文件](https://github.com/nginx/nginx/commit/af9e72533a69de3b8b7ed59be7be9b37203b5c82)</span><br><span class="line"></span><br><span class="line">#用文本编辑器打开 ./nginx-1.11.3/src/event/ngx_event_openssl.c</span><br><span class="line">#找到这个位置,大约在第2000行附近</span><br><span class="line">if (n == SSL_R_BAD_CHANGE_CIPHER_SPEC                        /*  103 */</span><br><span class="line">         || n == SSL_R_BLOCK_CIPHER_PAD_IS_WRONG                  /*  129 */</span><br><span class="line">         || n == SSL_R_DIGEST_CHECK_FAILED                        /*  149 */</span><br><span class="line">         || n == SSL_R_ERROR_IN_RECEIVED_CIPHER_LIST              /*  151 */</span><br><span class="line">         || n == SSL_R_EXCESSIVE_MESSAGE_SIZE                     /*  152 */</span><br><span class="line">         || n == SSL_R_LENGTH_MISMATCH                            /*  159 */</span><br><span class="line">         || n == SSL_R_NO_CIPHERS_PASSED                          /*  182 */</span><br><span class="line">         </span><br><span class="line">修改为</span><br><span class="line"></span><br><span class="line">if (n == SSL_R_BAD_CHANGE_CIPHER_SPEC                        /*  103 */</span><br><span class="line">         || n == SSL_R_BLOCK_CIPHER_PAD_IS_WRONG                  /*  129 */</span><br><span class="line">         || n == SSL_R_DIGEST_CHECK_FAILED                        /*  149 */</span><br><span class="line">         || n == SSL_R_ERROR_IN_RECEIVED_CIPHER_LIST              /*  151 */</span><br><span class="line">         || n == SSL_R_EXCESSIVE_MESSAGE_SIZE                     /*  152 */</span><br><span class="line">         || n == SSL_R_LENGTH_MISMATCH                            /*  159 */</span><br><span class="line">#ifdef SSL_R_NO_CIPHERS_PASSED</span><br><span class="line">         || n == SSL_R_NO_CIPHERS_PASSED                          /*  182 */</span><br><span class="line">#endif</span><br><span class="line"></span><br><span class="line">#保存</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">#编译Nginx</span><br><span class="line"></span><br><span class="line">#进入Nginx源码目录</span><br><span class="line">cd ./nginx-1.11.4</span><br><span class="line"></span><br><span class="line">#生成编译配置</span><br><span class="line">./configure \</span><br><span class="line">#设置OpenSSL源码目录</span><br><span class="line">--with-openssl=../openssl-1.1.0 \</span><br><span class="line">#设置nginx-ct源码目录</span><br><span class="line">--add-module=../nginx-ct-1.3.0 \</span><br><span class="line">--with-debug \</span><br><span class="line">--with-pcre-jit \</span><br><span class="line">--with-ipv6 \</span><br><span class="line">--with-http_ssl_module \</span><br><span class="line">#启用HTTP/2.0模块</span><br><span class="line">--with-http_v2_module \</span><br><span class="line">--with-http_stub_status_module \</span><br><span class="line">--with-http_realip_module \</span><br><span class="line">--with-http_auth_request_module \</span><br><span class="line">--with-http_addition_module \</span><br><span class="line">--with-http_dav_module \</span><br><span class="line">--with-http_gzip_static_module \</span><br><span class="line">--with-http_sub_module \</span><br><span class="line">--with-mail \</span><br><span class="line">--with-mail_ssl_module</span><br><span class="line">#如无缺失依赖库,将会生成MakeFile</span><br><span class="line"></span><br><span class="line">#开始编译</span><br><span class="line">make</span><br><span class="line">#编译完成后安装</span><br><span class="line">sudo make install</span><br><span class="line">#默认安装在 /usr/local/nginx 下</span><br><span class="line"></span><br><span class="line">#install Nginx End.</span><br></pre></td></tr></table></figure>
+<p>3.编译安装Php7.0</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">#从http://php.net/get/php-7.0.8.tar.gz/from/a/mirror 下载源码并解压</span><br><span class="line">tar -xzvf xxxx.tar.gz </span><br><span class="line"></span><br><span class="line">#安装依赖</span><br><span class="line">apt-get install libxml2-dev  libssl-dev libcurl4-gnutls-dev libmcrypt-dev</span><br><span class="line"></span><br><span class="line">#解压镜像，然后进入文件夹中</span><br><span class="line">./configure --prefix=/usr/local/php7 \</span><br><span class="line">--exec-prefix=/usr/local/php7 \</span><br><span class="line">--bindir=/usr/local/php7/bin \</span><br><span class="line">--sbindir=/usr/local/php7/sbin \</span><br><span class="line">--includedir=/usr/local/php7/include \</span><br><span class="line">--libdir=/usr/local/php7/lib/php \</span><br><span class="line">--mandir=/usr/local/php7/php/man \</span><br><span class="line">--enable-mbstring \</span><br><span class="line">--with-curl \</span><br><span class="line">--with-gd \</span><br><span class="line">--with-config-file-path=/usr/local/php7/etc \</span><br><span class="line">--enable-fpm \</span><br><span class="line">--enable-mysqlnd \</span><br><span class="line">--with-pdo-mysql=mysqlnd \</span><br><span class="line">--with-mysql-sock=/var/run/mysqld/mysqld.sock</span><br><span class="line"></span><br><span class="line">#如提示缺少依赖包,请根据错误提示安装</span><br><span class="line"></span><br><span class="line">#开始编译</span><br><span class="line">make</span><br><span class="line">#编译测试</span><br><span class="line">make test</span><br><span class="line">#安装</span><br><span class="line">make install</span><br><span class="line"></span><br><span class="line">#install Php7 End.</span><br></pre></td></tr></table></figure>
+<p>　　转自周海棠啦 原文链接<a href="https://nayoo.top/2018/03/17/Pi-install-PHP-Nginx/" target="_blank" rel="noopener">https://nayoo.top/2018/03/17/Pi-install-PHP-Nginx/</a></p>
+<hr>
+
+            <!--[if lt IE 9]><script>document.createElement('audio');</script><![endif]-->
+            <audio id="audio" loop="1" preload="auto" controls="controls" data-autoplay="false">
+                <source type="audio/mpeg" src="">
+            </audio>
+            
+                <ul id="audio-list" style="display:none">
+                    
+                        
+                            <li title='0' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                        
+                            <li title='1' data-url='http://link.hhtjim.com/163/5146554.mp3'></li>
+                        
+                    
+                </ul>
+            
+        </div>
+        
+    <div id='gitalk-container' class="comment link"
+        data-ae='false'
+        data-ci='580ea16e8e22f94249b1'
+        data-cs='b00c9d8ee15d4d6b0074bf771374f196ec08db26'
+        data-r='mthdm.github.io'
+        data-o='mthdm'
+        data-a='mthdm'
+        data-d='true'
+    >查看评论</div>
+
+
+    </div>
+    
+</div>
+
+
+    </div>
+</div>
+</body>
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+<script src="//lib.baomitu.com/jquery/1.8.3/jquery.min.js"></script>
+<script src="/js/plugin.js"></script>
+<script src="/js/diaspora.js"></script>
+<link rel="stylesheet" href="/photoswipe/photoswipe.css">
+<link rel="stylesheet" href="/photoswipe/default-skin/default-skin.css">
+<script src="/photoswipe/photoswipe.min.js"></script>
+<script src="/photoswipe/photoswipe-ui-default.min.js"></script>
+
+<!-- Root element of PhotoSwipe. Must have class pswp. -->
+<div class="pswp" tabindex="-1" role="dialog" aria-hidden="true">
+    <!-- Background of PhotoSwipe. 
+         It's a separate element as animating opacity is faster than rgba(). -->
+    <div class="pswp__bg"></div>
+    <!-- Slides wrapper with overflow:hidden. -->
+    <div class="pswp__scroll-wrap">
+        <!-- Container that holds slides. 
+            PhotoSwipe keeps only 3 of them in the DOM to save memory.
+            Don't modify these 3 pswp__item elements, data is added later on. -->
+        <div class="pswp__container">
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+            <div class="pswp__item"></div>
+        </div>
+        <!-- Default (PhotoSwipeUI_Default) interface on top of sliding area. Can be changed. -->
+        <div class="pswp__ui pswp__ui--hidden">
+            <div class="pswp__top-bar">
+                <!--  Controls are self-explanatory. Order can be changed. -->
+                <div class="pswp__counter"></div>
+                <button class="pswp__button pswp__button--close" title="Close (Esc)"></button>
+                <button class="pswp__button pswp__button--share" title="Share"></button>
+                <button class="pswp__button pswp__button--fs" title="Toggle fullscreen"></button>
+                <button class="pswp__button pswp__button--zoom" title="Zoom in/out"></button>
+                <!-- Preloader demo http://codepen.io/dimsemenov/pen/yyBWoR -->
+                <!-- element will get class pswp__preloader--active when preloader is running -->
+                <div class="pswp__preloader">
+                    <div class="pswp__preloader__icn">
+                      <div class="pswp__preloader__cut">
+                        <div class="pswp__preloader__donut"></div>
+                      </div>
+                    </div>
+                </div>
+            </div>
+            <div class="pswp__share-modal pswp__share-modal--hidden pswp__single-tap">
+                <div class="pswp__share-tooltip"></div> 
+            </div>
+            <button class="pswp__button pswp__button--arrow--left" title="Previous (arrow left)">
+            </button>
+            <button class="pswp__button pswp__button--arrow--right" title="Next (arrow right)">
+            </button>
+            <div class="pswp__caption">
+                <div class="pswp__caption__center"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+</html>
